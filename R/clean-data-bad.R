@@ -29,6 +29,7 @@ nlsy <- read_csv("nlsy.csv",
 
 
 
+
 library(dplyr)
 nlsy <- nlsy |>
 	mutate(region_cat = factor(region, labels = c("Northeast", "North Central", "South", "West")),
