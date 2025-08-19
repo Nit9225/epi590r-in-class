@@ -1,15 +1,24 @@
 ---
 title: "gtsummary in quarto"
-format: html
+format: 
+  html: 
+    theme: quartz
+#EXERCISE: Play around with theme!! two spaces- it needs to be exact
 #EXERCISE 4: Let’s not print the code from creating the tables. Using an option for the whole document, make it so that we don’t see the code from any of the chunks.
 execute: 
-  echo: false
+  echo: false 
+  
+ #i want to keep echo false- it is a cleaner look
+  
+ #to make the gtsummary tables colorful, use the following. it removes the indents though. 
+ #as kable: true
 ---
 
 ```{r}
 # EXERCISE 3: I don’t like seeing the output from the first chunk, where the packages are loaded. Use an option that makes it so that we don’t see this chunk’s output. Add Message : false
 
 #| message: false 
+#| echo: true
 library(tidyverse)
 library(gtsummary)
 nlsy_cols <- c("glasses", "eyesight", "sleep_wkdy", "sleep_wknd", 
@@ -50,16 +59,64 @@ tbl_summary(
   ),
   missing_text = "Missing")
 ```
+
 EXERCISE SET 2:
 
 ```{r}
 #| error: true
-#| eval: false
+#| eval: true
 tbl_summary(
-  NLSY,
+  nlsy,
   by = sex_cat,
   include = c(sex_cat, race_eth_cat, region_cat,
               eyesight_cat, glasses, age_bir))
 
 ```
 
+Great! So error true gave me an idea of what the error is. Here is the corrected code:
+
+```{r}
+tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir))
+```
+
+INLINE R
+I want to add `r 3+4` participants
+There were `r nrow(nlsy)` participants
+
+but the spacing is weird, so to make the spacing right, need the double line 
+INLINE R
+
+I want to add `r 3+4` participants
+
+There were `r nrow(nlsy)` participants
+
+```{r}
+#| label: tbl-one
+#| tbl-cap: "This is the first  table"
+knitr::kable(mtcars)
+```
+NEED TO RUN PREV CHUNKS for this to work!!!!!!!
+```{r}
+#| error: true
+#| label: tbl-sex
+#| tbl-cap: "descriptive statistics stratified by sex"
+
+tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir))
+```
+DOne
+
+The descriptive statistics are shown stratified by sex (@tbl-sex). 
+```{r}
+
+mean_sleep_weekend <- mean(nlsy$sleep_wknd, na.rm = TRUE) 
+```
+
+People slept an average of `r mean_sleep_weekend` hours
