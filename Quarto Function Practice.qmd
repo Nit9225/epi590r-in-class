@@ -167,7 +167,7 @@ std_dev <- function (x) {
 #OR if denominator = 0, return NA
 
 
-
+#check this
 std_dev <- function (x, na.rm) {
 	if (na.rm) {
 		#remove NA
