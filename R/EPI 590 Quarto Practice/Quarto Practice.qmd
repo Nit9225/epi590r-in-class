@@ -1,9 +1,15 @@
 ---
 title: "gtsummary in quarto"
 format: html
+#EXERCISE 4: Let’s not print the code from creating the tables. Using an option for the whole document, make it so that we don’t see the code from any of the chunks.
+execute: 
+  echo: false
 ---
 
 ```{r}
+# EXERCISE 3: I don’t like seeing the output from the first chunk, where the packages are loaded. Use an option that makes it so that we don’t see this chunk’s output. Add Message : false
+
+#| message: false 
 library(tidyverse)
 library(gtsummary)
 nlsy_cols <- c("glasses", "eyesight", "sleep_wkdy", "sleep_wknd", 
@@ -44,3 +50,16 @@ tbl_summary(
   ),
   missing_text = "Missing")
 ```
+EXERCISE SET 2:
+
+```{r}
+#| error: true
+#| eval: false
+tbl_summary(
+  NLSY,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir))
+
+```
+
