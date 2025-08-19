@@ -123,6 +123,37 @@ We need the na.rm function to get rid of any NAs
 People slept an average of `r mean_sleep_weekend` hours
 
 Regression tables with gt summary 
+```{r}
+stats <- list(n = nrow(nlsy),
+              mean_age = mean(nlsy$age_bir, na.rm = TRUE))
+```
+
+There were `r stats$n` participants with a mean age of `r stats$mean_age`
+```{r}
+#| label: tbl-descr
+#| tbl-cap: "Descriptive statistics"
+#| output-location: slide
+table_descriptive <- tbl_summary(
+  nlsy,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir)) |> 
+  add_overall(last = TRUE)
+table_descriptive
+```
+
+needed the table summary above to make it work
+```{r}
+inline_text(table_descriptive, variable = "age_bir", column = "stat_1")
+```
+```{r}
+inline_text(table_descriptive, variable = "glasses", column = "stat_0",
+            pattern = "{n}/{N} ({p}%)")
+```
+| error: TRUE 
+
+wont work, because this isnt a regression table. so lets redo it with a regression table. 
+inline_text(table_descriptive, variable = "age_bir",
 
 
 
