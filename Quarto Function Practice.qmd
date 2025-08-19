@@ -1,0 +1,192 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+Creating a new function:
+
+```{r}
+
+x <- c(1,2,3,4,5,6)
+n <- length(x)
+
+mean_value  <- sum (x)/ n
+
+#this is the function I am creating
+new_mean <- function(x) {
+	n <- length(x)
+	mean_value <- sum (x)/n
+	return(mean_value)
+}
+
+y <- c(123, 3259, 34923)
+
+#this prints the function
+new_mean(y)
+
+```
+
+```{r}
+
+#create a funciton to square a number
+z <- 2
+z*z
+
+square <- function(z){
+		squared_value <- z*z
+		return(squared_value)
+}
+y=8
+
+square(y)
+```
+
+```{r}
+
+add_two_numbers <- function(v,w) {
+	addition <- v+w
+	return(addition)
+}
+
+add_two_numbers (4,6)
+```
+
+```{r}
+x <- 10
+f1 <- function(x) {
+  function() {
+    x + 10
+  }
+}
+f1(1)()
+```
+
+```{r}
+`+`(1, `*`(2, 3))
+1 + (2 * 3)
+```
+
+```{r}
+mean(, TRUE, x = c(1:10, NA))
+x =  c(1:10)
+
+mean(x, na.rm = TRUE)
+```
+
+```{r}
+f2 <- function(a, b) {
+  a * 10
+}
+f2(10, stop("This is an error!"))
+```
+
+Testing the code
+
+```{r}
+prop <- function(x, multiplier) {
+  n <- length(x)
+  mean_val <- multiplier * sum(x) / n
+  return(mean_val)
+}
+
+prop(x = c(1, 0, 1, 0), multiplier = 1)
+
+prop(x = c(1, 0, 1, 0), multiplier = 100)
+```
+
+```{r}
+raise <- function(x, power) {
+	power_function <- x^power
+	return(power_function)
+}
+
+# test with
+raise(x = 2, power = 4)
+# should give you
+2^4
+#with different syntax this becomes 
+raise (2, 4)
+
+#to do this with a default value, I LOST IT
+
+raise <- function(x) {
+	power_function <- x^2
+	return(power_function)
+}
+raise (5)
+```
+
+1.  Create a function that takes a vector of numbers and returns the standard deviation manually (like we did the mean). Use `if` statements to check if the vector has only one (or fewer) elements and return `NA` if so. (Hint: the `length()` function will be helpful!) You don’t need any extra arguments besides the vector of numbers.
+
+```{r}
+std_dev <- function (x) {
+	denominator <- length(x)-1
+	mean_x <- mean(x)
+	differences <- x- mean_x
+	squared_differences <- differences^2
+	numerator <- sum(squared_differences)
+	standard_dev <- sqrt (numerator/ denominator)
+	return(standard_dev)
+}
+
+std_dev(x = c(14, 5, 6, 100000, 5000)) #this gives us a function of multiple vectors
+
+```
+
+2.  Modify your function to remove the NA values before calculating the standard deviation. (Hint: the `na.omit()` function will be helpful!) Add an argument `na.rm =`that defaults to `TRUE` (the *opposite* of the `na.rm` argument in the built-in R function `sd()`). If `na.rm = FALSE`, then the function should return `NA` if there are any NA values in the vector.
+
+```{r}
+std_dev <- function (x) {
+	if (length(x) <= 1)	{
+		return (NA)
+		}	else  {
+	denominator <- length(x)-1
+	mean_x <- mean(x)
+	differences <- x- mean_x
+	squared_differences <- differences^2
+	numerator <- sum(x-mean_x)^2
+	standard_dev <- sqrt (numerator/ denominator)
+	return(standard_dev)
+		}
+}
+
+#if there is ony 1 vector, it is NA
+#OR if denominator = 0, return NA
+
+
+
+std_dev <- function (x, na.rm) {
+	if (na.rm) {
+		#remove NA
+	} else {
+		#dont remove NA
+	}
+	}
+	if (length(x) <= 1)	{return (NA)}
+	}	
+else {
+	denominator <- length(x)-1
+	mean_x <- mean(x)
+	differences <- x- mean_x
+	squared_differences <- differences^2
+	numerator <- sum(x-mean_x)^2
+	standard_dev <- sqrt (numerator/ denominator)
+	return(standard_dev)
+}
+
+```
+
+if (3 \> 8) { print("This is true") } else { print("This is false") }
