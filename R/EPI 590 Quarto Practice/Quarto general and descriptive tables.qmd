@@ -119,4 +119,11 @@ The descriptive statistics are shown stratified by sex (@tbl-sex).
 mean_sleep_weekend <- mean(nlsy$sleep_wknd, na.rm = TRUE) 
 ```
 
+We need the na.rm function to get rid of any NAs
 People slept an average of `r mean_sleep_weekend` hours
+
+Regression tables with gt summary 
+
+
+
+
